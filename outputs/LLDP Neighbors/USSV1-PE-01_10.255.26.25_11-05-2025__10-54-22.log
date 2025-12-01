@@ -1,0 +1,29 @@
+==== DEVICE: USSV1-PE-01 (10.255.26.25) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 1 day, 18:02:54 ago
+Number of table inserts  : 228
+Number of table deletes  : 217
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                     Neighbor Port ID    TTL
+---------- -------------------------------------- ---------------------- ---
+Et3           USSJO-RND-PE-01.thermofisher.com       Ethernet1           120
+Et9           USABN-PE-01.thermofisher.com           Ethernet9           120
+Et11          USSV1-CS01.thermofisher.com            Twe1/0/8            120
+Et12          USSV1-CS01.thermofisher.com            Twe1/0/9            120
+Et19          USHIL-PE-01.thermofisher.com           Ethernet9           120
+Et25          USSV1-PE-02.thermofisher.com           Ethernet25          120
+Et26          USSV1-PE-02.thermofisher.com           Ethernet26          120
+Et31          USSFO-PE-01.thermofisher.com           Ethernet9           120
+Et37          USCBD-PE-01.thermofisher.com           Ethernet9           120
+Et41          USSV1-CS01.thermofisher.com            Twe2/0/8            120
+Et42          USSV1-CS01.thermofisher.com            Twe2/0/9            120
+

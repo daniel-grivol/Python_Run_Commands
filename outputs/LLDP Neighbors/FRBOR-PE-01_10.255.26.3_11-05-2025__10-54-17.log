@@ -1,0 +1,25 @@
+==== DEVICE: FRBOR-PE-01 (10.255.26.3) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 40 days, 15:08:46 ago
+Number of table inserts  : 9
+Number of table deletes  : 2
+Number of table drops    : 0
+Number of table age-outs : 2
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et1           FRBOR-PE-02.thermofisher.com       Ethernet1           120
+Et2           FRBOR-PE-02.thermofisher.com       Ethernet2           120
+Et6           FRBOR-CS01.thermofisher.com        Twe1/0/6            120
+Et12          UKLD6-PE-01.thermofisher.com       Ethernet12          120
+Et25          FRBOR-PE-02.thermofisher.com       Ethernet25          120
+Et26          FRBOR-PE-02.thermofisher.com       Ethernet26          120
+Et36          FRBOR-CS01.thermofisher.com        Twe2/0/6            120
+

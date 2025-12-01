@@ -1,0 +1,28 @@
+==== DEVICE: NLEIN-PE-01 (10.255.26.5) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 13 days, 8:22:57 ago
+Number of table inserts  : 18748
+Number of table deletes  : 18738
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                     Neighbor Port ID    TTL
+---------- -------------------------------------- ---------------------- ---
+Et1           NLEIN-PE-02.thermofisher.com           Ethernet1           120
+Et2           NLEIN-PE-02.thermofisher.com           Ethernet26          120
+Et7           NLEIN-DC-DS01                          Ethernet11          120
+Et8           NLEIN-DC-DS01                          Ethernet13          120
+Et12          UKLD6-PE-02.thermofisher.com           Ethernet12          120
+Et25          NLEIN-PE-02.thermofisher.com           Ethernet25          120
+Et26          NLEIN-PE-02.thermofisher.com           Ethernet2           120
+Et37          NLEIN-DC-DS02                          Ethernet12          120
+Et38          NLEIN-DC-DS02                          Ethernet14          120
+Ma1           NLEIN-CS-EXT-01.thermofisher.com       Gi1/0/5             120
+

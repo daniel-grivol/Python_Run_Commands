@@ -1,0 +1,25 @@
+==== DEVICE: USHIL-PE-02 (10.255.26.18) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 6 days, 23:24:10 ago
+Number of table inserts  : 53
+Number of table deletes  : 46
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                       Neighbor Port ID    TTL
+---------- ---------------------------------------- ---------------------- ---
+Et1           USHIL-PE-01.thermofisher.com             Ethernet1           120
+Et2           USHIL-PE-01.thermofisher.com             Ethernet2           120
+Et9           USSV1-PE-02.thermofisher.com             Ethernet19          120
+Et25          USHIL-PE-01.thermofisher.com             Ethernet25          120
+Et26          USHIL-PE-01.thermofisher.com             Ethernet26          120
+Et47          USHIL-D1-MDF-CS02.thermofisher.com       Ethernet47          120
+Et48          USHIL-D1-MDF-CS01.thermofisher.com       Ethernet48          120
+

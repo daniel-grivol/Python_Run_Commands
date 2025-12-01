@@ -1,0 +1,5028 @@
+==== DEVICE: CZBRN-PE-01 (10.255.26.1) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.234.5
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.170.255.17 remote-as 65389
+      neighbor 10.170.255.17 bfd
+      neighbor 10.170.255.17 description *** BRNO6807 ***
+      neighbor 10.170.255.17 route-map EVPN_POLICY_IN in
+      neighbor 10.170.255.17 send-community
+      neighbor 10.170.255.17 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.7005.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.5
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet32
+   isis enable 64525
+   isis metric 80000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.7005.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.5
+      no shutdown
+==== DEVICE: CZBRN-PE-02 (10.255.26.2) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.234.6
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.170.255.21 remote-as 65389
+      neighbor 10.170.255.21 bfd
+      neighbor 10.170.255.21 description *** BRNO6807 ***
+      neighbor 10.170.255.21 route-map EVPN_POLICY_IN in
+      neighbor 10.170.255.21 send-community
+      neighbor 10.170.255.21 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.7006.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.6
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet12
+   isis enable 64525
+   isis metric 40000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.7006.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.6
+      no shutdown
+==== DEVICE: FRBOR-PE-01 (10.255.26.3) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.234.3
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.113.80.2 remote-as 64600
+      neighbor 10.113.80.2 bfd
+      neighbor 10.113.80.2 description *** FRBOR-CS ***
+      neighbor 10.113.80.2 send-community
+      neighbor 10.113.80.2 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.7003.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.3
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet12
+   isis enable 64525
+   isis metric 32000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.7003.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.3
+      no shutdown
+==== DEVICE: FRBOR-PE-02 (10.255.26.4) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.234.4
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.113.80.6 remote-as 64600
+      neighbor 10.113.80.6 bfd
+      neighbor 10.113.80.6 description *** FRBOR-CS ***
+      neighbor 10.113.80.6 send-community
+      neighbor 10.113.80.6 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.7004.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.4
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet32
+   isis enable 64525
+   isis metric 36000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.7004.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.4
+      no shutdown
+==== DEVICE: NLEIN-PE-01 (10.255.26.5) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.234.7
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf ATT
+      rd 1:21302
+      neighbor 10.116.0.162 remote-as 65087
+      neighbor 10.116.0.162 next-hop-self
+      neighbor 10.116.0.162 bfd
+      neighbor 10.116.0.162 timers 5 15
+      neighbor 10.116.0.162 send-community
+      neighbor 10.116.0.162 maximum-routes 12000
+      neighbor 10.116.0.170 remote-as 65087
+      neighbor 10.116.0.170 next-hop-self
+      neighbor 10.116.0.170 bfd
+      neighbor 10.116.0.170 timers 5 15
+      neighbor 10.116.0.170 send-community
+      neighbor 10.116.0.170 maximum-routes 12000
+      neighbor 172.20.0.1 remote-as 21302
+      neighbor 172.20.0.1 next-hop-self
+      neighbor 172.20.0.1 bfd
+      neighbor 172.20.0.1 timers 15 45
+      neighbor 172.20.0.1 send-community
+      neighbor 172.20.0.1 maximum-routes 12000
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.113.176.66 remote-as 65087
+      neighbor 10.113.176.66 shutdown
+      neighbor 10.113.176.66 bfd
+      neighbor 10.113.176.66 description *** ACH65029-129 ***
+      neighbor 10.113.176.66 route-map EVPN_POLICY_IN in
+      neighbor 10.113.176.66 send-community
+      neighbor 10.113.176.66 maximum-routes 12000
+      neighbor 10.116.1.18 remote-as 65087
+      neighbor 10.116.1.18 bfd
+      neighbor 10.116.1.18 description NLEIN-DC-DS01
+      neighbor 10.116.1.18 route-map EVPN_POLICY_IN in
+      neighbor 10.116.1.18 send-community
+      neighbor 10.116.1.18 maximum-routes 12000
+      neighbor 10.116.1.26 remote-as 65087
+      neighbor 10.116.1.26 bfd
+      neighbor 10.116.1.26 description NLEIN-DC-DS02
+      neighbor 10.116.1.26 route-map EVPN_POLICY_IN in
+      neighbor 10.116.1.26 send-community
+      neighbor 10.116.1.26 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.7007.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.7
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet12
+   isis enable 64525
+   isis metric 20000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.7007.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.7
+      no shutdown
+==== DEVICE: NLEIN-PE-02 (10.255.26.6) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.234.8
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+   !
+   vrf ATT
+      rd 1:21302
+      neighbor 10.116.0.166 remote-as 65087
+      neighbor 10.116.0.166 next-hop-self
+      neighbor 10.116.0.166 bfd
+      neighbor 10.116.0.166 timers 5 15
+      neighbor 10.116.0.166 send-community
+      neighbor 10.116.0.166 maximum-routes 12000
+      neighbor 10.116.0.174 remote-as 65087
+      neighbor 10.116.0.174 next-hop-self
+      neighbor 10.116.0.174 bfd
+      neighbor 10.116.0.174 timers 5 15
+      neighbor 10.116.0.174 send-community
+      neighbor 10.116.0.174 maximum-routes 12000
+      neighbor 172.20.0.5 remote-as 21302
+      neighbor 172.20.0.5 next-hop-self
+      neighbor 172.20.0.5 bfd
+      neighbor 172.20.0.5 timers 15 45
+      neighbor 172.20.0.5 send-community
+      neighbor 172.20.0.5 maximum-routes 12000
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.113.176.70 remote-as 65087
+      neighbor 10.113.176.70 shutdown
+      neighbor 10.113.176.70 bfd
+      neighbor 10.113.176.70 description *** ACH65029-129 ***
+      neighbor 10.113.176.70 route-map EVPN_POLICY_IN in
+      neighbor 10.113.176.70 send-community
+      neighbor 10.113.176.70 maximum-routes 12000
+      neighbor 10.116.1.22 remote-as 65087
+      neighbor 10.116.1.22 bfd
+      neighbor 10.116.1.22 description NLEIN-DC-DS01
+      neighbor 10.116.1.22 route-map EVPN_POLICY_IN in
+      neighbor 10.116.1.22 send-community
+      neighbor 10.116.1.22 maximum-routes 12000
+      neighbor 10.116.1.30 remote-as 65087
+      neighbor 10.116.1.30 bfd
+      neighbor 10.116.1.30 description NLEIN-DC-DS02
+      neighbor 10.116.1.30 route-map EVPN_POLICY_IN in
+      neighbor 10.116.1.30 send-community
+      neighbor 10.116.1.30 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.7008.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.8
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet12
+   isis enable 64525
+   isis metric 40000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.7008.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.8
+      no shutdown
+==== DEVICE: UKLD6-PE-01 (10.255.26.7) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.234.1
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor Corp_to_UKLD6 peer group
+   neighbor Corp_to_UKLD6 remote-as 64524
+   neighbor Corp_to_UKLD6 bfd
+   neighbor Corp_to_UKLD6 description eBGP to Corp VRF LD6 DC Routers
+   neighbor Corp_to_UKLD6 route-map EVPN_POLICY_IN in
+   neighbor Corp_to_UKLD6 send-community
+   neighbor Corp_to_UKLD6 maximum-routes 12000
+   neighbor RnD_to_UKLD6 peer group
+   neighbor RnD_to_UKLD6 remote-as 64524
+   neighbor RnD_to_UKLD6 bfd
+   neighbor RnD_to_UKLD6 description eBGP to RnD VRF LD6 DC Routers
+   neighbor RnD_to_UKLD6 send-community
+   neighbor RnD_to_UKLD6 maximum-routes 12000
+   neighbor Underlay_to_UKLD6 peer group
+   neighbor Underlay_to_UKLD6 remote-as 64524
+   neighbor Underlay_to_UKLD6 bfd
+   neighbor Underlay_to_UKLD6 description eBGP to LD6 DC Routers
+   neighbor Underlay_to_UKLD6 send-community
+   neighbor Underlay_to_UKLD6 maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.119.128.1 peer group Corp_to_UKLD6
+      neighbor 10.119.128.2 peer group Corp_to_UKLD6
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      neighbor 10.119.128.17 peer group RnD_to_UKLD6
+      neighbor 10.119.128.18 peer group RnD_to_UKLD6
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.7001.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.1
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel54
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 1500000
+   isis network point-to-point
+interface Ethernet12
+   isis enable 64525
+   isis metric 32000
+   isis network point-to-point
+interface Ethernet32
+   isis enable 64525
+   isis metric 80000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.7001.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.1
+      no shutdown
+==== DEVICE: UKLD6-PE-02 (10.255.26.8) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.234.2
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor Corp_to_UKLD6 peer group
+   neighbor Corp_to_UKLD6 remote-as 64524
+   neighbor Corp_to_UKLD6 bfd
+   neighbor Corp_to_UKLD6 description eBGP to Corp VRF LD6 DC Routers
+   neighbor Corp_to_UKLD6 route-map EVPN_POLICY_IN in
+   neighbor Corp_to_UKLD6 send-community
+   neighbor Corp_to_UKLD6 maximum-routes 12000
+   neighbor RnD_to_UKLD6 peer group
+   neighbor RnD_to_UKLD6 remote-as 64524
+   neighbor RnD_to_UKLD6 bfd
+   neighbor RnD_to_UKLD6 description eBGP to RnD VRF LD6 DC Routers
+   neighbor RnD_to_UKLD6 send-community
+   neighbor RnD_to_UKLD6 maximum-routes 12000
+   neighbor Underlay_to_UKLD6 peer group
+   neighbor Underlay_to_UKLD6 remote-as 64524
+   neighbor Underlay_to_UKLD6 bfd
+   neighbor Underlay_to_UKLD6 description eBGP to LD6 DC Routers
+   neighbor Underlay_to_UKLD6 send-community
+   neighbor Underlay_to_UKLD6 maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.119.128.1 peer group Corp_to_UKLD6
+      neighbor 10.119.128.2 peer group Corp_to_UKLD6
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      neighbor 10.119.128.17 peer group RnD_to_UKLD6
+      neighbor 10.119.128.18 peer group RnD_to_UKLD6
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.7002.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.2
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel54
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet12
+   isis enable 64525
+   isis metric 20000
+   isis network point-to-point
+interface Ethernet32
+   isis enable 64525
+   isis metric 36000
+   isis network point-to-point
+interface Ethernet35
+   isis enable 64525
+   isis metric 1500000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.7002.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.234.2
+      no shutdown
+==== DEVICE: USABN-PE-01 (10.255.26.9) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 5
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list USGIL_SUBNETS
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.1
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor Corp_to_ABN peer group
+   neighbor Corp_to_ABN remote-as 65371
+   neighbor Corp_to_ABN bfd
+   neighbor Corp_to_ABN description eBGP to Corp VRF ABN DC Routers
+   neighbor Corp_to_ABN route-map PE_10G_POLICY_IN in
+   neighbor Corp_to_ABN password 7 IwZdslj0vaQnc7fnMDhXsX+BsLPAJ0FP
+   neighbor Corp_to_ABN send-community
+   neighbor Corp_to_ABN maximum-routes 12000
+   neighbor RnD_to_ABN peer group
+   neighbor RnD_to_ABN remote-as 65371
+   neighbor RnD_to_ABN bfd
+   neighbor RnD_to_ABN description eBGP to RnD VRF ABN DC Routers
+   neighbor RnD_to_ABN password 7 /1YcYZIjzA9MwIuVUZHrmPa04l1PNqFj
+   neighbor RnD_to_ABN send-community
+   neighbor RnD_to_ABN maximum-routes 12000
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.226.25 peer group BACKBONE
+   neighbor 10.165.226.26 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.226.25 activate
+      neighbor 10.165.226.26 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf CN_INT_ATNT_VRF
+      rd 1:13979
+      neighbor 10.165.134.13 remote-as 65371
+      neighbor 10.165.134.13 next-hop-self
+      neighbor 10.165.134.13 update-source Port-Channel55.990
+      neighbor 10.165.134.13 bfd
+      neighbor 10.165.134.13 description USABN_CORE_CN_INT_CORP_VRF
+      neighbor 10.165.134.13 timers 15 45
+      neighbor 10.165.134.13 password 7 EscJSzTjyflHt5fQAbixYt5BTUzz2N5A
+      neighbor 10.165.134.13 send-community
+      neighbor 10.165.134.13 maximum-routes 12000
+      neighbor 172.19.233.193 remote-as 13979
+      neighbor 172.19.233.193 next-hop-self
+      neighbor 172.19.233.193 local-as 65371 no-prepend replace-as
+      neighbor 172.19.233.193 bfd
+      neighbor 172.19.233.193 description AT&T_PRIM_CIRCUIT
+      neighbor 172.19.233.193 timers 15 45
+      neighbor 172.19.233.193 send-community
+      neighbor 172.19.233.193 maximum-routes 12000
+      network 32.252.52.96/29
+      network 32.253.208.72/29
+      network 32.253.233.160/29
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.165.134.5 peer group Corp_to_ABN
+      neighbor 10.165.134.5 description USABN_CORE_CN_INT_CORP_VRF
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      neighbor 10.165.134.9 peer group RnD_to_ABN
+      neighbor 10.165.134.9 description USABN_CORE_CN_INT_RND_VRF
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6001.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.1
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 116000
+   isis network point-to-point
+interface Ethernet13
+   isis enable 64525
+   isis metric 130000
+   isis network point-to-point
+interface Ethernet15
+   isis enable 64525
+   isis metric 1500000
+   isis network point-to-point
+interface Ethernet17
+   isis enable 64525
+   isis metric 15000
+   isis network point-to-point
+interface Ethernet31
+   isis enable 64525
+   isis metric 17000
+   isis network point-to-point
+interface Ethernet35
+   isis enable 64525
+   isis metric 1600000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6001.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.1
+      no shutdown
+==== DEVICE: USABN-PE-02 (10.255.26.10) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 5
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.2
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor Corp_to_ABN peer group
+   neighbor Corp_to_ABN remote-as 65371
+   neighbor Corp_to_ABN bfd
+   neighbor Corp_to_ABN description eBGP to Corp VRF ABN DC Routers
+   neighbor Corp_to_ABN route-map PE_10G_POLICY_IN in
+   neighbor Corp_to_ABN password 7 IwZdslj0vaQnc7fnMDhXsX+BsLPAJ0FP
+   neighbor Corp_to_ABN send-community
+   neighbor Corp_to_ABN maximum-routes 12000
+   neighbor RnD_to_ABN peer group
+   neighbor RnD_to_ABN remote-as 65371
+   neighbor RnD_to_ABN bfd
+   neighbor RnD_to_ABN description eBGP to RnD VRF ABN DC Routers
+   neighbor RnD_to_ABN password 7 /1YcYZIjzA9MwIuVUZHrmPa04l1PNqFj
+   neighbor RnD_to_ABN send-community
+   neighbor RnD_to_ABN maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.226.25 peer group BACKBONE
+   neighbor 10.165.226.26 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.226.25 activate
+      neighbor 10.165.226.26 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf CN_INT_ATNT_VRF
+      rd 1:13979
+      neighbor 10.165.134.29 remote-as 65371
+      neighbor 10.165.134.29 next-hop-self
+      neighbor 10.165.134.29 update-source Port-Channel56.991
+      neighbor 10.165.134.29 bfd
+      neighbor 10.165.134.29 description USABN_CORE_CN_INT_CORP_VRF
+      neighbor 10.165.134.29 timers 15 45
+      neighbor 10.165.134.29 password 7 E4BiX4zSoEzXHUL6ZIpPYAjZ3GQID8S3
+      neighbor 10.165.134.29 send-community
+      neighbor 10.165.134.29 maximum-routes 12000
+      neighbor 172.19.233.197 remote-as 13979
+      neighbor 172.19.233.197 next-hop-self
+      neighbor 172.19.233.197 local-as 65371 no-prepend replace-as
+      neighbor 172.19.233.197 bfd
+      neighbor 172.19.233.197 description AT&T_SEC_CIRCUIT
+      neighbor 172.19.233.197 timers 15 45
+      neighbor 172.19.233.197 send-community
+      neighbor 172.19.233.197 maximum-routes 12000
+      network 32.252.52.96/29
+      network 32.253.208.72/29
+      network 32.253.233.160/29
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.165.134.21 peer group Corp_to_ABN
+      neighbor 10.165.134.21 description USABN_CORE_CN_INT_CORP_VRF
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      neighbor 10.165.134.25 peer group RnD_to_ABN
+      neighbor 10.165.134.25 description USABN_CORE_CN_INT_RND_VRF
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6002.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.2
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 124000
+   isis network point-to-point
+interface Ethernet10
+   isis enable 64525
+   isis metric 80000
+   isis network point-to-point
+interface Ethernet15
+   isis enable 64525
+   isis metric 1500000
+   isis network point-to-point
+interface Ethernet17
+   isis enable 64525
+   isis metric 2500
+   isis network point-to-point
+interface Ethernet31
+   isis enable 64525
+   isis metric 6000
+   isis network point-to-point
+interface Ethernet35
+   isis enable 64525
+   isis metric 1500000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6002.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.2
+      no shutdown
+==== DEVICE: USAU4-PE-01 (10.255.26.11) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.21
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor Corp_to_USAU4 peer group
+   neighbor Corp_to_USAU4 remote-as 65171
+   neighbor Corp_to_USAU4 bfd
+   neighbor Corp_to_USAU4 description eBGP to Corp VRF USAU4 DC Routers
+   neighbor Corp_to_USAU4 send-community
+   neighbor Corp_to_USAU4 maximum-routes 12000
+   neighbor RnD_to_USAU4 peer group
+   neighbor RnD_to_USAU4 remote-as 65171
+   neighbor RnD_to_USAU4 bfd
+   neighbor RnD_to_USAU4 description eBGP to RnD VRF USAU4 DC Routers
+   neighbor RnD_to_USAU4 password 7 QKmZ95coQIyKCitZZqXeBg==
+   neighbor RnD_to_USAU4 send-community
+   neighbor RnD_to_USAU4 maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.5 peer group BACKBONE
+   neighbor 10.165.226.6 peer group BACKBONE
+   neighbor 10.165.226.7 peer group BACKBONE
+   neighbor 10.165.226.8 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.5 activate
+      neighbor 10.165.226.6 activate
+      neighbor 10.165.226.7 activate
+      neighbor 10.165.226.8 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 172.18.95.6 peer group Corp_to_USAU4
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6021.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.21
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 100
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 140000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6021.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.21
+      no shutdown
+==== DEVICE: USAU4-PE-02 (10.255.26.12) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.22
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor Corp_to_USAU4 peer group
+   neighbor Corp_to_USAU4 remote-as 65171
+   neighbor Corp_to_USAU4 bfd
+   neighbor Corp_to_USAU4 description eBGP to Corp VRF USAU4 DC Routers
+   neighbor Corp_to_USAU4 send-community
+   neighbor Corp_to_USAU4 maximum-routes 12000
+   neighbor RnD_to_USAU4 peer group
+   neighbor RnD_to_USAU4 remote-as 65171
+   neighbor RnD_to_USAU4 bfd
+   neighbor RnD_to_USAU4 description eBGP to RnD VRF USAU4 DC Routers
+   neighbor RnD_to_USAU4 password 7 QKmZ95coQIyKCitZZqXeBg==
+   neighbor RnD_to_USAU4 send-community
+   neighbor RnD_to_USAU4 maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.5 peer group BACKBONE
+   neighbor 10.165.226.6 peer group BACKBONE
+   neighbor 10.165.226.7 peer group BACKBONE
+   neighbor 10.165.226.8 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.5 activate
+      neighbor 10.165.226.6 activate
+      neighbor 10.165.226.7 activate
+      neighbor 10.165.226.8 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 172.18.95.10 peer group Corp_to_USAU4
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6022.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.22
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 100
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 80000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6022.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.22
+      no shutdown
+==== DEVICE: USCBD-PE-01 (10.255.26.13) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.13
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.56.8.1 remote-as 65163
+      neighbor 10.56.8.1 bfd
+      neighbor 10.56.8.1 description *** eBGP to USCBD-5781-CS01 E1/11 ***
+      neighbor 10.56.8.1 send-community
+      neighbor 10.56.8.1 maximum-routes 12000
+      neighbor 10.56.8.9 remote-as 65163
+      neighbor 10.56.8.9 bfd
+      neighbor 10.56.8.9 description *** eBGP to USCBD-5781-CS02 E1/11 ***
+      neighbor 10.56.8.9 send-community
+      neighbor 10.56.8.9 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      neighbor 10.56.8.129 remote-as 65163
+      neighbor 10.56.8.129 bfd
+      neighbor 10.56.8.129 description *** eBGP to USCBD-CS01 1/10 ***
+      neighbor 10.56.8.129 route-map EVPN_POLICY_RND_OUT out
+      neighbor 10.56.8.129 send-community
+      neighbor 10.56.8.129 maximum-routes 12000
+      neighbor 10.56.8.141 remote-as 65163
+      neighbor 10.56.8.141 bfd
+      neighbor 10.56.8.141 description *** eBGP to USCBD-CS02 1/10 ***
+      neighbor 10.56.8.141 route-map EVPN_POLICY_RND_OUT out
+      neighbor 10.56.8.141 send-community
+      neighbor 10.56.8.141 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6013.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.13
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 100
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 24000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6013.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.13
+      no shutdown
+==== DEVICE: USCBD-PE-02 (10.255.26.14) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.14
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.56.8.5 remote-as 65163
+      neighbor 10.56.8.5 bfd
+      neighbor 10.56.8.5 description *** eBGP to USCBD-5781-CS01 E1/26 ***
+      neighbor 10.56.8.5 send-community
+      neighbor 10.56.8.5 maximum-routes 12000
+      neighbor 10.56.8.13 remote-as 65163
+      neighbor 10.56.8.13 bfd
+      neighbor 10.56.8.13 description *** eBGP to USCBD-5781-CS02 E1/26 ***
+      neighbor 10.56.8.13 send-community
+      neighbor 10.56.8.13 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      neighbor 10.56.8.133 remote-as 65163
+      neighbor 10.56.8.133 bfd
+      neighbor 10.56.8.133 description *** eBGP to USCBD-CS01 1/25 ***
+      neighbor 10.56.8.133 route-map EVPN_POLICY_RND_OUT out
+      neighbor 10.56.8.133 send-community
+      neighbor 10.56.8.133 maximum-routes 12000
+      neighbor 10.56.8.137 remote-as 65163
+      neighbor 10.56.8.137 bfd
+      neighbor 10.56.8.137 description *** eBGP to USCBD-CS02 1/25 ***
+      neighbor 10.56.8.137 route-map EVPN_POLICY_RND_OUT out
+      neighbor 10.56.8.137 send-community
+      neighbor 10.56.8.137 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6014.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.14
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 100
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 56000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6014.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.14
+      no shutdown
+==== DEVICE: USFRD-PE-01 (10.255.26.15) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.17
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.10.90.81 remote-as 65454
+      neighbor 10.10.90.81 bfd
+      neighbor 10.10.90.81 description *** eBGP to USFRDDCCS01 ***
+      neighbor 10.10.90.81 send-community
+      neighbor 10.10.90.81 maximum-routes 12000
+      neighbor 10.10.90.89 remote-as 65454
+      neighbor 10.10.90.89 bfd
+      neighbor 10.10.90.89 description *** eBGP to USFRDDCCS02 ***
+      neighbor 10.10.90.89 send-community
+      neighbor 10.10.90.89 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6017.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.17
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 100
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 6000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6017.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.17
+      no shutdown
+==== DEVICE: USFRD-PE-02 (10.255.26.16) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.18
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.10.90.85 remote-as 65454
+      neighbor 10.10.90.85 bfd
+      neighbor 10.10.90.85 description *** eBGP to USFRDDCCS01 ***
+      neighbor 10.10.90.85 send-community
+      neighbor 10.10.90.85 maximum-routes 12000
+      neighbor 10.10.90.93 remote-as 65454
+      neighbor 10.10.90.93 bfd
+      neighbor 10.10.90.93 description *** eBGP to USFRDDCCS02 ***
+      neighbor 10.10.90.93 send-community
+      neighbor 10.10.90.93 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6018.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.18
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 100
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 10000
+   isis network point-to-point
+interface Ethernet33
+   isis enable 64525
+   isis metric 50000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6018.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.18
+      no shutdown
+==== DEVICE: USGIL-PE-01 (10.165.226.19) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.19
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 shutdown
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      router-id 10.25.18.17
+      neighbor 10.25.18.19 remote-as 65169
+      neighbor 10.25.18.19 bfd
+      neighbor 10.25.18.19 description *** eBGP to USGIL-CS01 ***
+      neighbor 10.25.18.19 send-community
+      neighbor 10.25.18.28 remote-as 65169
+      neighbor 10.25.18.28 bfd
+      neighbor 10.25.18.28 description *** eBGP to USGIL-CS02 ***
+      neighbor 10.25.18.28 send-community
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6019.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.19
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 100
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 17000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6019.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.19
+      no shutdown
+==== DEVICE: USGIL-PE-02 (10.165.226.20) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.19
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 shutdown
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      router-id 10.25.18.18
+      neighbor 10.25.18.19 remote-as 65169
+      neighbor 10.25.18.19 bfd
+      neighbor 10.25.18.19 description *** eBGP to USGIL-CS01 ***
+      neighbor 10.25.18.19 send-community
+      neighbor 10.25.18.28 remote-as 65169
+      neighbor 10.25.18.28 bfd
+      neighbor 10.25.18.28 description *** eBGP to USGIL-CS02 ***
+      neighbor 10.25.18.28 send-community
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6020.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.20
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 100
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 50000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6020.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.20
+      no shutdown
+==== DEVICE: USHIL-PE-01 (10.255.26.17) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.23
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      router-id 10.180.71.17
+      neighbor 10.180.71.19 remote-as 65010
+      neighbor 10.180.71.19 bfd
+      neighbor 10.180.71.19 description *** eBGP to USHIL-CS01 ***
+      neighbor 10.180.71.28 remote-as 65010
+      neighbor 10.180.71.28 bfd
+      neighbor 10.180.71.28 description *** eBGP to USHIL-CS02 ***
+      neighbor 10.180.71.28 send-community
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6023.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.23
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 80000
+   isis network point-to-point
+interface Ethernet14
+   isis enable 64525
+   isis metric 130000
+   isis network point-to-point
+interface Ethernet16
+   isis enable 64525
+   isis metric 130000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6023.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.23
+      no shutdown
+==== DEVICE: USHIL-PE-02 (10.255.26.18) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.24
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      router-id 10.180.71.26
+      neighbor 10.180.71.19 remote-as 65010
+      neighbor 10.180.71.19 bfd
+      neighbor 10.180.71.19 description *** eBGP to USHIL-CS01 ***
+      neighbor 10.180.71.19 send-community
+      neighbor 10.180.71.28 remote-as 65010
+      neighbor 10.180.71.28 bfd
+      neighbor 10.180.71.28 description *** eBGP to USHIL-CS02 ***
+      neighbor 10.180.71.28 send-community
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6024.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.23
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 30000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6024.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.23
+      no shutdown
+==== DEVICE: USPGH-PE-01 (10.255.26.19) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 5
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.15
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.160.6.154 remote-as 64692
+      neighbor 10.160.6.154 bfd
+      neighbor 10.160.6.154 description *** eBGP to USDO-ACCESS ***
+      neighbor 10.160.6.154 send-community
+      neighbor 10.160.6.154 maximum-routes 12000
+      neighbor 10.160.6.166 remote-as 64692
+      neighbor 10.160.6.166 bfd
+      neighbor 10.160.6.166 description *** eBGP to USDO-ACCESS-2 ***
+      neighbor 10.160.6.166 send-community
+      neighbor 10.160.6.166 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6015.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.15
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 15000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6015.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.15
+      no shutdown
+==== DEVICE: USPGH-PE-02 (10.255.26.20) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 5
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.16
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.160.6.158 remote-as 64692
+      neighbor 10.160.6.158 bfd
+      neighbor 10.160.6.158 description *** eBGP to USDO-ACCESS-2 ***
+      neighbor 10.160.6.158 send-community
+      neighbor 10.160.6.158 maximum-routes 12000
+      neighbor 10.160.6.162 remote-as 64692
+      neighbor 10.160.6.162 bfd
+      neighbor 10.160.6.162 description *** eBGP to USDO-ACCESS ***
+      neighbor 10.160.6.162 send-community
+      neighbor 10.160.6.162 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6016.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.16
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 10000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6016.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.16
+      no shutdown
+==== DEVICE: USPLE-PE-01 (10.255.26.21) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 5
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.9
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 172.19.9.13 remote-as 65194
+      neighbor 172.19.9.13 bfd
+      neighbor 172.19.9.13 description *** eBGP to USPLE-6055-CS-MDF-01 ***
+      neighbor 172.19.9.13 send-community
+      neighbor 172.19.9.13 maximum-routes 12000
+      neighbor 172.19.9.25 remote-as 65194
+      neighbor 172.19.9.25 bfd
+      neighbor 172.19.9.25 description *** eBGP to USPLE-6055-CS-MDF-02 ***
+      neighbor 172.19.9.25 send-community
+      neighbor 172.19.9.25 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6009.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.9
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 100
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 4000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6009.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.9
+      no shutdown
+==== DEVICE: USPLE-PE-02 (10.255.26.22) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 5
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.10
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 172.19.9.17 remote-as 65194
+      neighbor 172.19.9.17 bfd
+      neighbor 172.19.9.17 description *** eBGP to USPLE-6055-CS-MDF-02 ***
+      neighbor 172.19.9.17 send-community
+      neighbor 172.19.9.17 maximum-routes 12000
+      neighbor 172.19.9.21 remote-as 65194
+      neighbor 172.19.9.21 bfd
+      neighbor 172.19.9.21 description *** eBGP to USPLE-6055-CS-MDF-01 ***
+      neighbor 172.19.9.21 send-community
+      neighbor 172.19.9.21 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6010.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.10
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 100
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 4000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6010.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.10
+      no shutdown
+==== DEVICE: USSFO-PE-01 (10.255.26.23) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.11
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.5 peer group BACKBONE
+   neighbor 10.165.226.6 peer group BACKBONE
+   neighbor 10.165.226.7 peer group BACKBONE
+   neighbor 10.165.226.8 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.5 activate
+      neighbor 10.165.226.6 activate
+      neighbor 10.165.226.7 activate
+      neighbor 10.165.226.8 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.43.0.33 remote-as 65193
+      neighbor 10.43.0.33 bfd
+      neighbor 10.43.0.33 description *** eBGP to USSFOCS01-200 ***
+      neighbor 10.43.0.33 send-community
+      neighbor 10.43.0.33 maximum-routes 12000
+      neighbor 10.43.0.41 remote-as 65193
+      neighbor 10.43.0.41 bfd
+      neighbor 10.43.0.41 description *** eBGP to USSFOCS02-200 ***
+      neighbor 10.43.0.41 send-community
+      neighbor 10.43.0.41 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      neighbor 10.45.4.5 remote-as 65193
+      neighbor 10.45.4.5 bfd
+      neighbor 10.45.4.5 description *** eBGP to USSFO-CS01 1/10 ***
+      neighbor 10.45.4.5 route-map EVPN_POLICY_RND_OUT out
+      neighbor 10.45.4.5 send-community
+      neighbor 10.45.4.5 maximum-routes 12000
+      neighbor 10.45.4.17 remote-as 65193
+      neighbor 10.45.4.17 bfd
+      neighbor 10.45.4.17 description *** eBGP to USSFO-CS02 1/25 ***
+      neighbor 10.45.4.17 route-map EVPN_POLICY_RND_OUT out
+      neighbor 10.45.4.17 send-community
+      neighbor 10.45.4.17 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6011.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.11
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 100
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 3000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6011.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.11
+      no shutdown
+==== DEVICE: USSFO-PE-02 (10.255.26.24) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.12
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.43.0.37 remote-as 65193
+      neighbor 10.43.0.37 bfd
+      neighbor 10.43.0.37 description *** eBGP to USSFOCS01-200 ***
+      neighbor 10.43.0.37 send-community
+      neighbor 10.43.0.37 maximum-routes 12000
+      neighbor 10.43.0.45 remote-as 65193
+      neighbor 10.43.0.45 bfd
+      neighbor 10.43.0.45 description *** eBGP to USSFOCS02-200 ***
+      neighbor 10.43.0.45 send-community
+      neighbor 10.43.0.45 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      neighbor 10.45.4.9 remote-as 65193
+      neighbor 10.45.4.9 bfd
+      neighbor 10.45.4.9 description *** eBGP to USSFO-CS01 1/25 ***
+      neighbor 10.45.4.9 route-map EVPN_POLICY_RND_OUT out
+      neighbor 10.45.4.9 send-community
+      neighbor 10.45.4.9 maximum-routes 12000
+      neighbor 10.45.4.13 remote-as 65193
+      neighbor 10.45.4.13 bfd
+      neighbor 10.45.4.13 description *** eBGP to USSFO-CS02 1/10 ***
+      neighbor 10.45.4.13 route-map EVPN_POLICY_RND_OUT out
+      neighbor 10.45.4.13 send-community
+      neighbor 10.45.4.13 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6012.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.12
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 100
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 4000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6012.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.12
+      no shutdown
+==== DEVICE: USSJO-RND-PE-01 (10.165.226.25) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.25
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.226.26 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.226.26 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      neighbor 10.165.60.34 remote-as 65390
+      neighbor 10.165.60.34 bfd
+      neighbor 10.165.60.34 description *** eBGP to USSJO-RND-CS01 ***
+      neighbor 10.165.60.34 route-map EVPN_POLICY_RND_IN in
+      neighbor 10.165.60.34 send-community
+      neighbor 10.165.60.34 maximum-routes 12000
+      neighbor 10.165.60.42 remote-as 65390
+      neighbor 10.165.60.42 bfd
+      neighbor 10.165.60.42 description *** eBGP to USSJO-RND-CS02 ***
+      neighbor 10.165.60.42 route-map EVPN_POLICY_RND_IN in
+      neighbor 10.165.60.42 send-community
+      neighbor 10.165.60.42 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6025.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.25
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 100
+   isis network point-to-point
+interface Ethernet1
+   isis enable 64525
+   isis metric 2000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6025.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.25
+      no shutdown
+==== DEVICE: USSJO-RND-PE-02 (10.165.226.26) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+route-map REDIST_TO_BGP permit 10
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.26
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.226.25 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.226.25 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      neighbor 10.165.60.38 remote-as 65390
+      neighbor 10.165.60.38 bfd
+      neighbor 10.165.60.38 description *** eBGP to USSJO-RND-CS01 ***
+      neighbor 10.165.60.38 route-map EVPN_POLICY_RND_IN in
+      neighbor 10.165.60.38 send-community
+      neighbor 10.165.60.38 maximum-routes 12000
+      neighbor 10.165.60.46 remote-as 65390
+      neighbor 10.165.60.46 bfd
+      neighbor 10.165.60.46 description *** eBGP to USSJO-RND-CS02 ***
+      neighbor 10.165.60.46 route-map EVPN_POLICY_RND_IN in
+      neighbor 10.165.60.46 send-community
+      neighbor 10.165.60.46 maximum-routes 12000
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6026.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.26
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 100
+   isis network point-to-point
+interface Ethernet1
+   isis enable 64525
+   isis metric 2000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6026.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.26
+      no shutdown
+==== DEVICE: USSV1-PE-01 (10.255.26.25) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 5
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.3
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor Corp_to_SV5 peer group
+   neighbor Corp_to_SV5 remote-as 65262
+   neighbor Corp_to_SV5 bfd
+   neighbor Corp_to_SV5 description eBGP to Corp VRF SV5 DC Routers
+   neighbor Corp_to_SV5 route-map PE_10G_POLICY_IN in
+   neighbor Corp_to_SV5 password 7 h6YgomzheilmUHRbT90QqAJk5i8j+brw
+   neighbor Corp_to_SV5 send-community
+   neighbor Corp_to_SV5 maximum-routes 12000
+   neighbor RnD_to_SV5 peer group
+   neighbor RnD_to_SV5 remote-as 65262
+   neighbor RnD_to_SV5 bfd
+   neighbor RnD_to_SV5 description eBGP to RnD VRF SV5 DC Routers
+   neighbor RnD_to_SV5 password 7 HWn/Cq6ymf7kc6eUEpB8wTCGePUxM+fd
+   neighbor RnD_to_SV5 send-community
+   neighbor RnD_to_SV5 maximum-routes 12000
+   neighbor Underlay_to_SV5 peer group
+   neighbor Underlay_to_SV5 remote-as 65262
+   neighbor Underlay_to_SV5 bfd
+   neighbor Underlay_to_SV5 description eBGP to SV5 DC Routers
+   neighbor Underlay_to_SV5 password 7 vbsDkuiaJPe1d0o2iroE7S48TE0Hx7W8
+   neighbor Underlay_to_SV5 send-community
+   neighbor Underlay_to_SV5 maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.4 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.226.25 peer group BACKBONE
+   neighbor 10.165.226.26 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   neighbor 10.166.134.1 peer group Underlay_to_SV5
+   neighbor 10.166.134.1 description USSV1_CORE_UNDERLAY
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.4 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.226.25 activate
+      neighbor 10.165.226.26 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf CN_INT_ATNT_VRF
+      rd 1:13979
+      neighbor 10.166.134.13 remote-as 65262
+      neighbor 10.166.134.13 next-hop-self
+      neighbor 10.166.134.13 update-source Port-Channel55.990
+      neighbor 10.166.134.13 bfd
+      neighbor 10.166.134.13 description USSV1_CORE_CN_INT_CORP_VRF
+      neighbor 10.166.134.13 timers 15 45
+      neighbor 10.166.134.13 password 7 Xu/zTT+d9VozcPW8xCVqsMb5VWNRI39p
+      neighbor 10.166.134.13 send-community
+      neighbor 10.166.134.13 maximum-routes 12000
+      neighbor 172.19.233.201 remote-as 13979
+      neighbor 172.19.233.201 next-hop-self
+      neighbor 172.19.233.201 local-as 65262 no-prepend replace-as
+      neighbor 172.19.233.201 bfd
+      neighbor 172.19.233.201 description AT&T_PRIM_CIRCUIT
+      neighbor 172.19.233.201 timers 15 45
+      neighbor 172.19.233.201 send-community
+      neighbor 172.19.233.201 maximum-routes 12000
+      network 32.252.49.128/29
+      network 32.253.233.152/29
+      network 32.253.238.112/29
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      neighbor 10.166.134.5 peer group Corp_to_SV5
+      neighbor 10.166.134.5 description USSV1_CORE_CN_INT_CORP_VRF
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      neighbor 10.166.134.9 peer group RnD_to_SV5
+      neighbor 10.166.134.9 description USSV1_CORE_CN_INT_RND_VRF
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6003.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.3
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet3
+   isis enable 64525
+   isis metric 2000
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 116000
+   isis network point-to-point
+interface Ethernet19
+   isis enable 64525
+   isis metric 80000
+   isis network point-to-point
+interface Ethernet31
+   isis enable 64525
+   isis metric 3000
+   isis network point-to-point
+interface Ethernet37
+   isis enable 64525
+   isis metric 24000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6003.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.3
+      no shutdown
+==== DEVICE: USSV1-PE-02 (10.255.26.26) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show running-config | section BGP
+snmp-server enable traps bgp
+route-map REDIST_TO_BGP permit 5
+   match ip address prefix-list EVPN_CORP_LOOPBACK
+route-map REDIST_TO_BGP permit 40
+   set community no-export
+router bgp 64525
+   router-id 10.165.226.4
+   timers bgp 5 15
+   graceful-restart restart-time 120
+   graceful-restart stalepath-time 360
+   graceful-restart
+   bgp always-compare-med
+   maximum-paths 6
+   neighbor BACKBONE peer group
+   neighbor BACKBONE remote-as 64525
+   neighbor BACKBONE update-source Loopback0
+   neighbor BACKBONE bfd
+   neighbor BACKBONE description iBGP to all PE Switches
+   neighbor BACKBONE password 7 zcp693HU8+lGHeJaIOcHBZOd/1KQRvhr
+   neighbor BACKBONE send-community standard extended
+   neighbor BACKBONE maximum-routes 12000
+   neighbor Corp_to_SV5 peer group
+   neighbor Corp_to_SV5 remote-as 65262
+   neighbor Corp_to_SV5 bfd
+   neighbor Corp_to_SV5 description eBGP to Corp VRF SV5 DC Routers
+   neighbor Corp_to_SV5 route-map PE_10G_POLICY_IN in
+   neighbor Corp_to_SV5 password 7 h6YgomzheilmUHRbT90QqAJk5i8j+brw
+   neighbor Corp_to_SV5 send-community
+   neighbor Corp_to_SV5 maximum-routes 12000
+   neighbor RnD_to_SV5 peer group
+   neighbor RnD_to_SV5 remote-as 65262
+   neighbor RnD_to_SV5 bfd
+   neighbor RnD_to_SV5 description eBGP to RnD VRF SV5 DC Routers
+   neighbor RnD_to_SV5 password 7 HWn/Cq6ymf7kc6eUEpB8wTCGePUxM+fd
+   neighbor RnD_to_SV5 send-community
+   neighbor RnD_to_SV5 maximum-routes 12000
+   neighbor Underlay_to_SV5 peer group
+   neighbor Underlay_to_SV5 remote-as 65262
+   neighbor Underlay_to_SV5 bfd
+   neighbor Underlay_to_SV5 description eBGP to SV5 DC Routers
+   neighbor Underlay_to_SV5 password 7 vbsDkuiaJPe1d0o2iroE7S48TE0Hx7W8
+   neighbor Underlay_to_SV5 send-community
+   neighbor Underlay_to_SV5 maximum-routes 12000
+   neighbor 10.165.226.1 peer group BACKBONE
+   neighbor 10.165.226.2 peer group BACKBONE
+   neighbor 10.165.226.3 peer group BACKBONE
+   neighbor 10.165.226.9 peer group BACKBONE
+   neighbor 10.165.226.10 peer group BACKBONE
+   neighbor 10.165.226.11 peer group BACKBONE
+   neighbor 10.165.226.12 peer group BACKBONE
+   neighbor 10.165.226.13 peer group BACKBONE
+   neighbor 10.165.226.14 peer group BACKBONE
+   neighbor 10.165.226.15 peer group BACKBONE
+   neighbor 10.165.226.16 peer group BACKBONE
+   neighbor 10.165.226.17 peer group BACKBONE
+   neighbor 10.165.226.18 peer group BACKBONE
+   neighbor 10.165.226.19 peer group BACKBONE
+   neighbor 10.165.226.20 peer group BACKBONE
+   neighbor 10.165.226.21 peer group BACKBONE
+   neighbor 10.165.226.22 peer group BACKBONE
+   neighbor 10.165.226.23 peer group BACKBONE
+   neighbor 10.165.226.24 peer group BACKBONE
+   neighbor 10.165.226.25 peer group BACKBONE
+   neighbor 10.165.226.26 peer group BACKBONE
+   neighbor 10.165.234.1 peer group BACKBONE
+   neighbor 10.165.234.2 peer group BACKBONE
+   neighbor 10.165.234.3 peer group BACKBONE
+   neighbor 10.165.234.4 peer group BACKBONE
+   neighbor 10.165.234.5 peer group BACKBONE
+   neighbor 10.165.234.6 peer group BACKBONE
+   neighbor 10.165.234.7 peer group BACKBONE
+   neighbor 10.165.234.8 peer group BACKBONE
+   neighbor 10.166.134.17 peer group Underlay_to_SV5
+   neighbor 10.166.134.17 description USSV1_CORE_UNDERLAY
+   redistribute connected
+   redistribute static
+   !
+   address-family evpn
+      neighbor default encapsulation mpls 
+      neighbor 10.165.226.1 activate
+      neighbor 10.165.226.2 activate
+      neighbor 10.165.226.3 activate
+      neighbor 10.165.226.9 activate
+      neighbor 10.165.226.10 activate
+      neighbor 10.165.226.11 activate
+      neighbor 10.165.226.12 activate
+      neighbor 10.165.226.13 activate
+      neighbor 10.165.226.14 activate
+      neighbor 10.165.226.15 activate
+      neighbor 10.165.226.16 activate
+      neighbor 10.165.226.17 activate
+      neighbor 10.165.226.18 activate
+      neighbor 10.165.226.19 activate
+      neighbor 10.165.226.20 activate
+      neighbor 10.165.226.21 activate
+      neighbor 10.165.226.22 activate
+      neighbor 10.165.226.23 activate
+      neighbor 10.165.226.24 activate
+      neighbor 10.165.226.25 activate
+      neighbor 10.165.226.26 activate
+      neighbor 10.165.234.1 activate
+      neighbor 10.165.234.2 activate
+      neighbor 10.165.234.3 activate
+      neighbor 10.165.234.4 activate
+      neighbor 10.165.234.5 activate
+      neighbor 10.165.234.6 activate
+      neighbor 10.165.234.7 activate
+      neighbor 10.165.234.8 activate
+   !
+   vrf CN_INT_ATNT_VRF
+      rd 1:13979
+      router-id 10.165.226.4
+      neighbor 10.166.134.29 remote-as 65262
+      neighbor 10.166.134.29 next-hop-self
+      neighbor 10.166.134.29 update-source Port-Channel56.991
+      neighbor 10.166.134.29 bfd
+      neighbor 10.166.134.29 description USSV1_CORE_CN_INT_CORP_VRF
+      neighbor 10.166.134.29 timers 15 45
+      neighbor 10.166.134.29 password 7 gw3Pw5H6955EDeIJ3jztEZc+qBRkLrMP
+      neighbor 10.166.134.29 send-community
+      neighbor 10.166.134.29 maximum-routes 12000
+      neighbor 172.19.233.205 remote-as 13979
+      neighbor 172.19.233.205 next-hop-self
+      neighbor 172.19.233.205 local-as 65262 no-prepend replace-as
+      neighbor 172.19.233.205 bfd
+      neighbor 172.19.233.205 description AT&T_SEC_CIRCUIT
+      neighbor 172.19.233.205 timers 15 45
+      neighbor 172.19.233.205 send-community
+      neighbor 172.19.233.205 maximum-routes 12000
+      network 32.252.49.128/29
+      network 32.253.233.152/29
+      network 32.253.238.112/29
+   !
+   vrf Corp
+      rd 1:501
+      route-target import 1:501
+      route-target export 1:501
+      router-id 10.165.226.4
+      neighbor 10.166.134.21 peer group Corp_to_SV5
+      neighbor 10.166.134.21 description USSV1_CORE_CN_INT_CORP_VRF
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+   !
+   vrf RnD
+      rd 1:502
+      route-target import 1:502
+      route-target export 1:502
+      router-id 10.165.226.4
+      neighbor 10.166.134.25 peer group RnD_to_SV5
+      neighbor 10.166.134.25 description USSV1_CORE_CN_INT_RND_VRF
+      redistribute connected route-map REDIST_TO_BGP
+      redistribute static route-map REDIST_TO_BGP
+
+$ show running-config | section router ISIS
+router isis 64525
+   net 49.0001.0101.6522.6004.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.4
+      no shutdown
+
+$ show running-config | section ISIS
+interface Port-Channel100
+   isis enable 64525
+   isis metric 50
+   isis network point-to-point
+interface Ethernet3
+   isis enable 64525
+   isis metric 2000
+   isis network point-to-point
+interface Ethernet9
+   isis enable 64525
+   isis metric 124000
+   isis network point-to-point
+interface Ethernet10
+   isis enable 64525
+   isis metric 140000
+   isis network point-to-point
+interface Ethernet19
+   isis enable 64525
+   isis metric 30000
+   isis network point-to-point
+interface Ethernet31
+   isis enable 64525
+   isis metric 4000
+   isis network point-to-point
+interface Ethernet37
+   isis enable 64525
+   isis metric 56000
+   isis network point-to-point
+interface Loopback0
+   isis enable 64525
+   isis passive
+router isis 64525
+   net 49.0001.0101.6522.6004.00
+   is-type level-2
+   log-adjacency-changes
+   authentication mode md5
+   authentication key 7 4YI/cWiDt3FMjmSNTd/ZUEubeiaF47vj
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.165.226.4
+      no shutdown

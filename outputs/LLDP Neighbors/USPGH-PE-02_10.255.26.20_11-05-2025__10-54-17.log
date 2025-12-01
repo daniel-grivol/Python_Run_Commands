@@ -1,0 +1,25 @@
+==== DEVICE: USPGH-PE-02 (10.255.26.20) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 6 days, 11:43:35 ago
+Number of table inserts  : 29
+Number of table deletes  : 22
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et1           USPGH-PE-01.thermofisher.com       Ethernet1           120
+Et2           USPGH-PE-01.thermofisher.com       Ethernet2           120
+Et9           USFRD-PE-02.thermofisher.com       Ethernet9           120
+Et11          usdo-access.thermo.com             Te6/1               120
+Et25          USPGH-PE-01.thermofisher.com       Ethernet25          120
+Et26          USPGH-PE-01.thermofisher.com       Ethernet26          120
+Et41          usdo-access2.thermo.com            Te5/5               120
+

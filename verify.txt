@@ -1,0 +1,19 @@
+! ===== Common verification =====
+show clock
+show ntp status
+show logging
+
+
+! ===== Cisco IOS/NX-OS/IOS-XE =====
+!show run | include ntp
+!show run | include snmp
+!show run | include logging
+show interfaces status
+!show version
+
+! ===== Arista EOS =====
+!show running-config | grep ntp
+!show logging
+!show hostname
+!show version
+

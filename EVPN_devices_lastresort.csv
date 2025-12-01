@@ -1,0 +1,4 @@
+hostname,device_type,host,username,password,secret,port
+USSJO-RND-PE-01,arista_eos,10.165.226.25,,,,22
+USSJO-RND-PE-02,arista_eos,10.165.226.26,,,,22
+

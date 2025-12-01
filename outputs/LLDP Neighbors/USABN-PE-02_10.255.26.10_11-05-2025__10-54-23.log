@@ -1,0 +1,28 @@
+==== DEVICE: USABN-PE-02 (10.255.26.10) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 5 days, 1:19:52 ago
+Number of table inserts  : 72
+Number of table deletes  : 62
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et9           USSV1-PE-02.thermofisher.com       Ethernet9           120
+Et10          USAU4-PE-02.thermofisher.com       Ethernet9           120
+Et11          USABN-CS02.thermofisher.com        Twe1/0/8            120
+Et12          USABN-CS02.thermofisher.com        Twe1/0/9            120
+Et15          UKLD6-PE-02.thermofisher.com       Ethernet35          120
+Et25          USABN-PE-01.thermofisher.com       Ethernet25          120
+Et26          USABN-PE-01.thermofisher.com       Ethernet26          120
+Et31          USFRD-PE-01.thermofisher.com       Ethernet9           120
+Et41          USABN-CS02.thermofisher.com        Twe2/0/8            120
+Et42          USABN-CS02.thermofisher.com        Twe2/0/9            120
+

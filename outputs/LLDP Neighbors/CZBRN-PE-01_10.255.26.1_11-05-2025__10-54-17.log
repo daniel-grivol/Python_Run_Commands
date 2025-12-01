@@ -1,0 +1,25 @@
+==== DEVICE: CZBRN-PE-01 (10.255.26.1) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 14:26:21 ago
+Number of table inserts  : 463
+Number of table deletes  : 456
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et1           CZBRN-PE-02.thermofisher.com       Ethernet1           120
+Et2           CZBRN-PE-02.thermofisher.com       Ethernet2           120
+Et11          CZBRN-CS01.thermofisher.com        Ethernet5           120
+Et25          CZBRN-PE-02.thermofisher.com       Ethernet25          120
+Et26          CZBRN-PE-02.thermofisher.com       Ethernet26          120
+Et32          UKLD6-PE-01.thermofisher.com       Ethernet32          120
+Et41          CZBRN-CS01.thermofisher.com        Ethernet6           120
+

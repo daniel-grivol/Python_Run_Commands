@@ -1,0 +1,3 @@
+hostname,device_type,host,username,password,secret,port
+CZBRN-PE-01,arista_eos,10.255.26.1,,,,22
+CZBRN-PE-02,arista_eos,10.255.26.2,,,,22

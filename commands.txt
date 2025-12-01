@@ -1,0 +1,7 @@
+terminal length 0
+!show version
+!show ip interface brief
+!show lldp neighbors
+show running-config | section BGP
+show running-config | section router ISIS
+show running-config | section ISIS

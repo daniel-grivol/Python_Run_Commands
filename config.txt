@@ -1,0 +1,24 @@
+! ===== Common settings =====
+service timestamps log datetime msec
+no ip domain-lookup
+ntp server 192.0.2.10
+logging host 192.0.2.11
+snmp-server community PUBLIC RO
+snmp-server contact Network Operations
+snmp-server location Data Center
+
+! ===== Cisco IOS/NX-OS/IOS-XE only =====
+ip ssh version 2
+line vty 0 4
+ login local
+ transport input ssh
+exec-timeout 10 0
+
+! ===== Arista EOS only =====
+ntp server 192.0.2.10 prefer
+management api http-commands
+ no shutdown
+!
+
+#Lines starting with ! or # are ignored by the script.
+

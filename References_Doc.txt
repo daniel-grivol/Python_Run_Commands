@@ -1,0 +1,17 @@
+5) Handy options you’ll likely use
+
+Run on all devices:
+python run_on_devices.py -i inventory.csv --cmd "show version" --ask-pass
+
+
+Provide username on the CLI (overrides CSV blanks):
+python run_on_devices.py -i inventory.csv -u daniel.grivol --cmd "show interfaces status" --ask-pass
+
+
+Use enable on Cisco:
+python run_on_devices.py -i inventory.csv --cmd "show run | inc hostname" `
+  --ask-pass --enable --ask-secret
+
+
+Faster on big lists:
+python run_on_devices.py -i inventory.csv --cmd "show lldp neighbors" --ask-pass --workers 25

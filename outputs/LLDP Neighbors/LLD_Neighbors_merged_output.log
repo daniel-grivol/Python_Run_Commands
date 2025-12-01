@@ -1,0 +1,775 @@
+==== DEVICE: CZBRN-PE-01 (10.255.26.1) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 14:26:21 ago
+Number of table inserts  : 463
+Number of table deletes  : 456
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et1           CZBRN-PE-02.thermofisher.com       Ethernet1           120
+Et2           CZBRN-PE-02.thermofisher.com       Ethernet2           120
+Et11          CZBRN-CS01.thermofisher.com        Ethernet5           120
+Et25          CZBRN-PE-02.thermofisher.com       Ethernet25          120
+Et26          CZBRN-PE-02.thermofisher.com       Ethernet26          120
+Et32          UKLD6-PE-01.thermofisher.com       Ethernet32          120
+Et41          CZBRN-CS01.thermofisher.com        Ethernet6           120
+
+==== DEVICE: CZBRN-PE-02 (10.255.26.2) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 14 days, 4:58:55 ago
+Number of table inserts  : 56
+Number of table deletes  : 49
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et1           CZBRN-PE-01.thermofisher.com       Ethernet1           120
+Et2           CZBRN-PE-01.thermofisher.com       Ethernet2           120
+Et11          CZBRN-CS02.thermofisher.com        Ethernet5           120
+Et12          NLEIN-PE-02.thermofisher.com       Ethernet12          120
+Et25          CZBRN-PE-01.thermofisher.com       Ethernet25          120
+Et26          CZBRN-PE-01.thermofisher.com       Ethernet26          120
+Et41          CZBRN-CS02.thermofisher.com        Ethernet6           120
+
+==== DEVICE: FRBOR-PE-01 (10.255.26.3) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 40 days, 15:08:46 ago
+Number of table inserts  : 9
+Number of table deletes  : 2
+Number of table drops    : 0
+Number of table age-outs : 2
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et1           FRBOR-PE-02.thermofisher.com       Ethernet1           120
+Et2           FRBOR-PE-02.thermofisher.com       Ethernet2           120
+Et6           FRBOR-CS01.thermofisher.com        Twe1/0/6            120
+Et12          UKLD6-PE-01.thermofisher.com       Ethernet12          120
+Et25          FRBOR-PE-02.thermofisher.com       Ethernet25          120
+Et26          FRBOR-PE-02.thermofisher.com       Ethernet26          120
+Et36          FRBOR-CS01.thermofisher.com        Twe2/0/6            120
+
+==== DEVICE: FRBOR-PE-02 (10.255.26.4) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 27 days, 16:01:53 ago
+Number of table inserts  : 17
+Number of table deletes  : 10
+Number of table drops    : 0
+Number of table age-outs : 6
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et1           FRBOR-PE-01.thermofisher.com       Ethernet1           120
+Et2           FRBOR-PE-01.thermofisher.com       Ethernet2           120
+Et6           FRBOR-CS01.thermofisher.com        Twe1/0/16           120
+Et25          FRBOR-PE-01.thermofisher.com       Ethernet25          120
+Et26          FRBOR-PE-01.thermofisher.com       Ethernet26          120
+Et32          UKLD6-PE-02.thermofisher.com       Ethernet32          120
+Et36          FRBOR-CS01.thermofisher.com        Twe2/0/16           120
+
+==== DEVICE: NLEIN-PE-01 (10.255.26.5) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 13 days, 8:22:57 ago
+Number of table inserts  : 18748
+Number of table deletes  : 18738
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                     Neighbor Port ID    TTL
+---------- -------------------------------------- ---------------------- ---
+Et1           NLEIN-PE-02.thermofisher.com           Ethernet1           120
+Et2           NLEIN-PE-02.thermofisher.com           Ethernet26          120
+Et7           NLEIN-DC-DS01                          Ethernet11          120
+Et8           NLEIN-DC-DS01                          Ethernet13          120
+Et12          UKLD6-PE-02.thermofisher.com           Ethernet12          120
+Et25          NLEIN-PE-02.thermofisher.com           Ethernet25          120
+Et26          NLEIN-PE-02.thermofisher.com           Ethernet2           120
+Et37          NLEIN-DC-DS02                          Ethernet12          120
+Et38          NLEIN-DC-DS02                          Ethernet14          120
+Ma1           NLEIN-CS-EXT-01.thermofisher.com       Gi1/0/5             120
+
+==== DEVICE: NLEIN-PE-02 (10.255.26.6) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 14 days, 4:58:54 ago
+Number of table inserts  : 62
+Number of table deletes  : 52
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                     Neighbor Port ID    TTL
+---------- -------------------------------------- ---------------------- ---
+Et1           NLEIN-PE-01.thermofisher.com           Ethernet1           120
+Et2           NLEIN-PE-01.thermofisher.com           Ethernet26          120
+Et7           NLEIN-DC-DS02                          Ethernet11          120
+Et8           NLEIN-DC-DS02                          Ethernet13          120
+Et12          CZBRN-PE-02.thermofisher.com           Ethernet12          120
+Et25          NLEIN-PE-01.thermofisher.com           Ethernet25          120
+Et26          NLEIN-PE-01.thermofisher.com           Ethernet2           120
+Et37          NLEIN-DC-DS01                          Ethernet12          120
+Et38          NLEIN-DC-DS01                          Ethernet14          120
+Ma1           NLEIN-CS-EXT-02.thermofisher.com       Gi2/0/13            120
+
+==== DEVICE: UKLD6-PE-01 (10.255.26.7) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 14:26:26 ago
+Number of table inserts  : 258
+Number of table deletes  : 251
+Number of table drops    : 0
+Number of table age-outs : 1
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et9           USABN-PE-01.thermofisher.com       Ethernet15          120
+Et11          UKLD7-CS01.thermofisher.com        Twe1/0/8            120
+Et12          FRBOR-PE-01.thermofisher.com       Ethernet12          120
+Et25          UKLD6-PE-02.thermofisher.com       Ethernet25          120
+Et26          UKLD6-PE-02.thermofisher.com       Ethernet26          120
+Et32          CZBRN-PE-01.thermofisher.com       Ethernet32          120
+Et41          UKLD7-CS01.thermofisher.com        Twe2/0/8            120
+
+==== DEVICE: UKLD6-PE-02 (10.255.26.8) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 7 days, 10:32:48 ago
+Number of table inserts  : 4609
+Number of table deletes  : 4602
+Number of table drops    : 0
+Number of table age-outs : 1
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et11          UKLD7-CS02.thermofisher.com        Twe1/0/8            120
+Et12          NLEIN-PE-01.thermofisher.com       Ethernet12          120
+Et25          UKLD6-PE-01.thermofisher.com       Ethernet25          120
+Et26          UKLD6-PE-01.thermofisher.com       Ethernet26          120
+Et32          FRBOR-PE-02.thermofisher.com       Ethernet32          120
+Et35          USABN-PE-02.thermofisher.com       Ethernet15          120
+Et41          UKLD7-CS02.thermofisher.com        Twe2/0/8            120
+
+==== DEVICE: USABN-PE-01 (10.255.26.9) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 6:35:40 ago
+Number of table inserts  : 138
+Number of table deletes  : 127
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et9           USSV1-PE-01.thermofisher.com       Ethernet9           120
+Et11          USABN-CS01.thermofisher.com        Twe1/0/8            120
+Et12          USABN-CS01.thermofisher.com        Twe1/0/9            120
+Et13          USHIL-PE-01.thermofisher.com       Ethernet14          120
+Et15          UKLD6-PE-01.thermofisher.com       Ethernet9           120
+Et17          USPGH-PE-01.thermofisher.com       Ethernet9           120
+Et25          USABN-PE-02.thermofisher.com       Ethernet25          120
+Et26          USABN-PE-02.thermofisher.com       Ethernet26          120
+Et31          USGIL-PE-01.thermofisher.com       Ethernet9           120
+Et41          USABN-CS01.thermofisher.com        Twe2/0/8            120
+Et42          USABN-CS01.thermofisher.com        Twe2/0/9            120
+
+==== DEVICE: USABN-PE-02 (10.255.26.10) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 5 days, 1:19:52 ago
+Number of table inserts  : 72
+Number of table deletes  : 62
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et9           USSV1-PE-02.thermofisher.com       Ethernet9           120
+Et10          USAU4-PE-02.thermofisher.com       Ethernet9           120
+Et11          USABN-CS02.thermofisher.com        Twe1/0/8            120
+Et12          USABN-CS02.thermofisher.com        Twe1/0/9            120
+Et15          UKLD6-PE-02.thermofisher.com       Ethernet35          120
+Et25          USABN-PE-01.thermofisher.com       Ethernet25          120
+Et26          USABN-PE-01.thermofisher.com       Ethernet26          120
+Et31          USFRD-PE-01.thermofisher.com       Ethernet9           120
+Et41          USABN-CS02.thermofisher.com        Twe2/0/8            120
+Et42          USABN-CS02.thermofisher.com        Twe2/0/9            120
+
+==== DEVICE: USAU4-PE-01 (10.255.26.11) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 5 days, 7:24:50 ago
+Number of table inserts  : 66
+Number of table deletes  : 59
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                   Neighbor Port ID    TTL
+---------- ------------------------------------ ---------------------- ---
+Et1           USAU4-PE-02.thermofisher.com         Ethernet1           120
+Et2           USAU4-PE-02.thermofisher.com         Ethernet2           120
+Et9           USSV1-PE-02.thermofisher.com         Ethernet10          120
+Et11          USAU4-CS01-9K.thermofisher.com       Te1/1/7             120
+Et25          USAU4-PE-02.thermofisher.com         Ethernet25          120
+Et26          USAU4-PE-02.thermofisher.com         Ethernet26          120
+Et41          USAU4-CS01-9K.thermofisher.com       Te2/1/7             120
+
+==== DEVICE: USAU4-PE-02 (10.255.26.12) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 5 days, 1:20:11 ago
+Number of table inserts  : 64
+Number of table deletes  : 57
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                   Neighbor Port ID    TTL
+---------- ------------------------------------ ---------------------- ---
+Et1           USAU4-PE-01.thermofisher.com         Ethernet1           120
+Et2           USAU4-PE-01.thermofisher.com         Ethernet2           120
+Et9           USABN-PE-02.thermofisher.com         Ethernet10          120
+Et11          USAU4-CS01-9K.thermofisher.com       Te1/1/8             120
+Et25          USAU4-PE-01.thermofisher.com         Ethernet25          120
+Et26          USAU4-PE-01.thermofisher.com         Ethernet26          120
+Et41          USAU4-CS01-9K.thermofisher.com       Te2/1/8             120
+
+==== DEVICE: USCBD-PE-01 (10.255.26.13) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 16 days, 16:47:13 ago
+Number of table inserts  : 23
+Number of table deletes  : 14
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                     Neighbor Port ID    TTL
+---------- -------------------------------------- ---------------------- ---
+Et1           USCBD-PE-02.thermofisher.com           Ethernet1           120
+Et2           USCBD-PE-02.thermofisher.com           Ethernet2           120
+Et9           USSV1-PE-01.thermofisher.com           Ethernet37          120
+Et11          USCBD-5781-CS01.thermofisher.com       Ethernet1/11        120
+Et17          USCBD-5781-CS01.thermofisher.com       Ethernet1/10        120
+Et25          USCBD-PE-02.thermofisher.com           Ethernet25          120
+Et26          USCBD-PE-02.thermofisher.com           Ethernet26          120
+Et37          USCBD-5781-CS02.thermofisher.com       Ethernet1/25        120
+Et41          USCBD-5781-CS01.thermofisher.com       Ethernet1/26        120
+
+==== DEVICE: USCBD-PE-02 (10.255.26.14) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 1 day, 19:10:02 ago
+Number of table inserts  : 69
+Number of table deletes  : 60
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                     Neighbor Port ID    TTL
+---------- -------------------------------------- ---------------------- ---
+Et1           USCBD-PE-01.thermofisher.com           Ethernet1           120
+Et2           USCBD-PE-01.thermofisher.com           Ethernet2           120
+Et9           USSV1-PE-02.thermofisher.com           Ethernet37          120
+Et11          USCBD-5781-CS02.thermofisher.com       Ethernet1/11        120
+Et17          USCBD-5781-CS02.thermofisher.com       Ethernet1/10        120
+Et25          USCBD-PE-01.thermofisher.com           Ethernet25          120
+Et26          USCBD-PE-01.thermofisher.com           Ethernet26          120
+Et37          USCBD-5781-CS01.thermofisher.com       Ethernet1/25        120
+Et41          USCBD-5781-CS02.thermofisher.com       Ethernet1/26        120
+
+==== DEVICE: USFRD-PE-01 (10.255.26.15) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 12 days, 2:51:32 ago
+Number of table inserts  : 14
+Number of table deletes  : 7
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                          Neighbor Port ID    TTL
+---------- ------------------------------------------- ---------------------- ---
+Et1           USFRD-PE-02.thermofisher.com                Ethernet1           120
+Et2           USFRD-PE-02.thermofisher.com                Ethernet2           120
+Et9           USABN-PE-02.thermofisher.com                Ethernet31          120
+Et11          USFRD-7305-CS-MDF-01.thermofisher.com       Ethernet1/6         120
+Et25          USFRD-PE-02.thermofisher.com                Ethernet25          120
+Et26          USFRD-PE-02.thermofisher.com                Ethernet26          120
+Et41          USFRD-7305-CS-MDF-02.thermofisher.com       Ethernet1/6         120
+
+==== DEVICE: USFRD-PE-02 (10.255.26.16) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 6 days, 11:43:30 ago
+Number of table inserts  : 289
+Number of table deletes  : 281
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                          Neighbor Port ID    TTL
+---------- ------------------------------------------- ---------------------- ---
+Et1           USFRD-PE-01.thermofisher.com                Ethernet1           120
+Et2           USFRD-PE-01.thermofisher.com                Ethernet2           120
+Et9           USPGH-PE-02.thermofisher.com                Ethernet9           120
+Et11          USFRD-7305-CS-MDF-01.thermofisher.com       Ethernet1/7         120
+Et25          USFRD-PE-01.thermofisher.com                Ethernet25          120
+Et26          USFRD-PE-01.thermofisher.com                Ethernet26          120
+Et33          USGIL-PE-02.thermofisher.com                Ethernet9           120
+Et41          USFRD-7305-CS-MDF-02.thermofisher.com       Ethernet1/7         120
+
+==== DEVICE: USGIL-PE-01 (10.165.226.19) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 101 days, 14:52:33 ago
+Number of table inserts  : 6
+Number of table deletes  : 1
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et1           USGIL-PE-02.thermofisher.com       Ethernet1           120
+Et2           USGIL-PE-02.thermofisher.com       Ethernet2           120
+Et9           USABN-PE-01.thermofisher.com       Ethernet31          120
+Et11          USGIL-CS-01.thermofisher.com       Ethernet11          120
+Et12          USGIL-CS-02.thermofisher.com       Ethernet12          120
+
+==== DEVICE: USGIL-PE-02 (10.165.226.20) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 12 days, 2:51:44 ago
+Number of table inserts  : 276
+Number of table deletes  : 271
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et1           USGIL-PE-01.thermofisher.com       Ethernet1           120
+Et2           USGIL-PE-01.thermofisher.com       Ethernet2           120
+Et9           USFRD-PE-02.thermofisher.com       Ethernet33          120
+Et11          USGIL-CS-02.thermofisher.com       Ethernet11          120
+Et12          USGIL-CS-01.thermofisher.com       Ethernet12          120
+
+==== DEVICE: USHIL-PE-01 (10.255.26.17) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 6:35:37 ago
+Number of table inserts  : 322
+Number of table deletes  : 314
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                       Neighbor Port ID    TTL
+---------- ---------------------------------------- ---------------------- ---
+Et1           USHIL-PE-02.thermofisher.com             Ethernet1           120
+Et2           USHIL-PE-02.thermofisher.com             Ethernet2           120
+Et9           USSV1-PE-01.thermofisher.com             Ethernet19          120
+Et14          USABN-PE-01.thermofisher.com             Ethernet13          120
+Et25          USHIL-PE-02.thermofisher.com             Ethernet25          120
+Et26          USHIL-PE-02.thermofisher.com             Ethernet26          120
+Et47          USHIL-D1-MDF-CS01.thermofisher.com       Ethernet47          120
+Et48          USHIL-D1-MDF-CS02.thermofisher.com       Ethernet48          120
+
+==== DEVICE: USHIL-PE-02 (10.255.26.18) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 6 days, 23:24:10 ago
+Number of table inserts  : 53
+Number of table deletes  : 46
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                       Neighbor Port ID    TTL
+---------- ---------------------------------------- ---------------------- ---
+Et1           USHIL-PE-01.thermofisher.com             Ethernet1           120
+Et2           USHIL-PE-01.thermofisher.com             Ethernet2           120
+Et9           USSV1-PE-02.thermofisher.com             Ethernet19          120
+Et25          USHIL-PE-01.thermofisher.com             Ethernet25          120
+Et26          USHIL-PE-01.thermofisher.com             Ethernet26          120
+Et47          USHIL-D1-MDF-CS02.thermofisher.com       Ethernet47          120
+Et48          USHIL-D1-MDF-CS01.thermofisher.com       Ethernet48          120
+
+==== DEVICE: USPGH-PE-01 (10.255.26.19) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 5 days, 6:42:32 ago
+Number of table inserts  : 76
+Number of table deletes  : 66
+Number of table drops    : 0
+Number of table age-outs : 64
+
+Port          Neighbor Device ID                        Neighbor Port ID    TTL
+---------- ----------------------------------------- ---------------------- ---
+Et1           USPGH-PE-02.thermofisher.com              Ethernet1           120
+Et2           USPGH-PE-02.thermofisher.com              Ethernet2           120
+Et9           USABN-PE-01.thermofisher.com              Ethernet17          120
+Et11          usdo-access.thermo.com                    Te5/5               120
+Et25          USPGH-PE-02.thermofisher.com              Ethernet25          120
+Et26          USPGH-PE-02.thermofisher.com              Ethernet26          120
+Et41          usdo-access2.thermo.com                   Te6/1               120
+Ma1           USPGH-MGT-DS01.thermofisher.com           Gi1/0/12            120
+Ma1           USPGH-DC-DS02-PROD.thermofisher.com       mgmt0               120
+Ma1           USPGH-DMZ-DS02.thermofisher.com           mgmt0               120
+
+==== DEVICE: USPGH-PE-02 (10.255.26.20) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 6 days, 11:43:35 ago
+Number of table inserts  : 29
+Number of table deletes  : 22
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et1           USPGH-PE-01.thermofisher.com       Ethernet1           120
+Et2           USPGH-PE-01.thermofisher.com       Ethernet2           120
+Et9           USFRD-PE-02.thermofisher.com       Ethernet9           120
+Et11          usdo-access.thermo.com             Te6/1               120
+Et25          USPGH-PE-01.thermofisher.com       Ethernet25          120
+Et26          USPGH-PE-01.thermofisher.com       Ethernet26          120
+Et41          usdo-access2.thermo.com            Te5/5               120
+
+==== DEVICE: USPLE-PE-01 (10.255.26.21) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 42 days, 9:56:22 ago
+Number of table inserts  : 7
+Number of table deletes  : 0
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                          Neighbor Port ID    TTL
+---------- ------------------------------------------- ---------------------- ---
+Et1           USPLE-PE-02.thermofisher.com                Ethernet1           120
+Et2           USPLE-PE-02.thermofisher.com                Ethernet2           120
+Et9           USSV1-PE-02.thermofisher.com                Ethernet31          120
+Et11          USPLE-Bld-D-MDF-CS01.thermofisher.com       Ethernet37          120
+Et25          USPLE-PE-02.thermofisher.com                Ethernet25          120
+Et26          USPLE-PE-02.thermofisher.com                Ethernet26          120
+Et41          USPLE-Bld-D-MDF-CS02.thermofisher.com       Ethernet38          120
+
+==== DEVICE: USPLE-PE-02 (10.255.26.22) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 42 days, 9:56:28 ago
+Number of table inserts  : 7
+Number of table deletes  : 0
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                          Neighbor Port ID    TTL
+---------- ------------------------------------------- ---------------------- ---
+Et1           USPLE-PE-01.thermofisher.com                Ethernet1           120
+Et2           USPLE-PE-01.thermofisher.com                Ethernet2           120
+Et9           USSFO-PE-02.thermofisher.com                Ethernet9           120
+Et11          USPLE-Bld-D-MDF-CS02.thermofisher.com       Ethernet37          120
+Et25          USPLE-PE-01.thermofisher.com                Ethernet25          120
+Et26          USPLE-PE-01.thermofisher.com                Ethernet26          120
+Et41          USPLE-Bld-D-MDF-CS01.thermofisher.com       Ethernet38          120
+
+==== DEVICE: USSFO-PE-01 (10.255.26.23) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 14 days, 21:28:49 ago
+Number of table inserts  : 17
+Number of table deletes  : 8
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et1           USSFO-PE-02.thermofisher.com       Ethernet1           120
+Et2           USSFO-PE-02.thermofisher.com       Ethernet2           120
+Et9           USSV1-PE-01.thermofisher.com       Ethernet31          120
+Et11          USSFO-CS01.thermofisher.com        Ethernet1/11        120
+Et17          USSFO-CS01.thermofisher.com        Ethernet1/10        120
+Et25          USSFO-PE-02.thermofisher.com       Ethernet25          120
+Et26          USSFO-PE-02.thermofisher.com       Ethernet26          120
+Et37          USSFO-CS02.thermofisher.com        Ethernet1/25        120
+Et41          USSFO-CS02.thermofisher.com        Ethernet1/11        120
+
+==== DEVICE: USSFO-PE-02 (10.255.26.24) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 42 days, 9:57:14 ago
+Number of table inserts  : 24
+Number of table deletes  : 15
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et1           USSFO-PE-01.thermofisher.com       Ethernet1           120
+Et2           USSFO-PE-01.thermofisher.com       Ethernet2           120
+Et9           USPLE-PE-02.thermofisher.com       Ethernet9           120
+Et11          USSFO-CS01.thermofisher.com        Ethernet1/26        120
+Et17          USSFO-CS02.thermofisher.com        Ethernet1/10        120
+Et25          USSFO-PE-01.thermofisher.com       Ethernet25          120
+Et26          USSFO-PE-01.thermofisher.com       Ethernet26          120
+Et37          USSFO-CS01.thermofisher.com        Ethernet1/25        120
+Et41          USSFO-CS02.thermofisher.com        Ethernet1/26        120
+
+==== DEVICE: USSJO-RND-PE-01 (10.165.226.25) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 7 days, 19:38:31 ago
+Number of table inserts  : 13
+Number of table deletes  : 8
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port            Neighbor Device ID                     Neighbor Port ID    TTL
+------------ -------------------------------------- ---------------------- ---
+Et1             USSV1-PE-01.thermofisher.com           Ethernet3           120
+Et13            USSJO-RND-CS01.thermofisher.com        Twe1/0/11           120
+Et14            USSJO-RND-CS01.thermofisher.com        Twe2/0/11           120
+Et49/1          USSJO-RND-PE-02.thermofisher.com       Ethernet49/1        120
+Et50/1          USSJO-RND-PE-02.thermofisher.com       Ethernet50/1        120
+
+==== DEVICE: USSJO-RND-PE-02 (10.165.226.26) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 19 days, 21:50:52 ago
+Number of table inserts  : 4
+Number of table deletes  : 0
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port            Neighbor Device ID                     Neighbor Port ID    TTL
+------------ -------------------------------------- ---------------------- ---
+Et13            USSJO-RND-CS01.thermofisher.com        Twe1/0/12           120
+Et14            USSJO-RND-CS01.thermofisher.com        Twe2/0/12           120
+Et49/1          USSJO-RND-PE-01.thermofisher.com       Ethernet49/1        120
+Et50/1          USSJO-RND-PE-01.thermofisher.com       Ethernet50/1        120
+
+==== DEVICE: USSV1-PE-01 (10.255.26.25) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 1 day, 18:02:54 ago
+Number of table inserts  : 228
+Number of table deletes  : 217
+Number of table drops    : 0
+Number of table age-outs : 0
+
+Port          Neighbor Device ID                     Neighbor Port ID    TTL
+---------- -------------------------------------- ---------------------- ---
+Et3           USSJO-RND-PE-01.thermofisher.com       Ethernet1           120
+Et9           USABN-PE-01.thermofisher.com           Ethernet9           120
+Et11          USSV1-CS01.thermofisher.com            Twe1/0/8            120
+Et12          USSV1-CS01.thermofisher.com            Twe1/0/9            120
+Et19          USHIL-PE-01.thermofisher.com           Ethernet9           120
+Et25          USSV1-PE-02.thermofisher.com           Ethernet25          120
+Et26          USSV1-PE-02.thermofisher.com           Ethernet26          120
+Et31          USSFO-PE-01.thermofisher.com           Ethernet9           120
+Et37          USCBD-PE-01.thermofisher.com           Ethernet9           120
+Et41          USSV1-CS01.thermofisher.com            Twe2/0/8            120
+Et42          USSV1-CS01.thermofisher.com            Twe2/0/9            120
+
+==== DEVICE: USSV1-PE-02 (10.255.26.26) ====
+device_type: arista_eos
+mode: show
+port: 22
+
+$ terminal length 0
+Pagination disabled.
+
+$ show lldp neighbors
+Last table change time   : 1 day, 19:10:05 ago
+Number of table inserts  : 223
+Number of table deletes  : 212
+Number of table drops    : 0
+Number of table age-outs : 2
+
+Port          Neighbor Device ID                 Neighbor Port ID    TTL
+---------- ---------------------------------- ---------------------- ---
+Et9           USABN-PE-02.thermofisher.com       Ethernet9           120
+Et10          USAU4-PE-01.thermofisher.com       Ethernet9           120
+Et11          USSV1-CS02.thermofisher.com        Twe1/0/8            120
+Et12          USSV1-CS02.thermofisher.com        Twe1/0/9            120
+Et19          USHIL-PE-02.thermofisher.com       Ethernet9           120
+Et25          USSV1-PE-01.thermofisher.com       Ethernet25          120
+Et26          USSV1-PE-01.thermofisher.com       Ethernet26          120
+Et31          USPLE-PE-01.thermofisher.com       Ethernet9           120
+Et37          USCBD-PE-02.thermofisher.com       Ethernet9           120
+Et41          USSV1-CS02.thermofisher.com        Twe2/0/8            120
+Et42          USSV1-CS02.thermofisher.com        Twe2/0/9            120
+
